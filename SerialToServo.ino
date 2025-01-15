@@ -16,6 +16,8 @@ int angleToPulse(int angle) {
 }
 void servocom(int x, int y, int z, int lor){
   int ang = lor==0?45:135;
+  digitalWrite(x+20,HIGH);
+   digitalWrite(z+20,HIGH);
   if(x>10)
    pwm2.setPWM(x-11, 0, angleToPulse(ang));
  else
@@ -33,6 +35,8 @@ void servocom(int x, int y, int z, int lor){
   pwm2.setPWM(z-11, 0, angleToPulse(90));
   else
    pwm1.setPWM(z-1, 0, angleToPulse(90));
+   digitalWrite(x+20,LOW);
+   digitalWrite(z+20,LOW);
   }
 
 
@@ -40,12 +44,14 @@ void setup() {
   int k = 8;
   pwm1.begin();
   pwm1.setPWMFreq(50); 
-  pwm2.begin();
+   pwm2.begin();
   pwm2.setPWMFreq(50); // Set frequency to 50 Hz
 
 Serial.begin(9600);
-while(k>=0){  // to bring all servos to normal position at the very start
-   pwm1.setPWM(k, 0, angleToPulse(90));
+while(k>=0){ 
+  pinMode(k+21,OUTPUT); // SETTING PINS FOR CORRESPONDING leds 21,22,23.... &31,32,33... 
+  pinMode(k+31,OUTPUT);
+   pwm1.setPWM(k, 0, angleToPulse(90));// to bring all servos to normal position at the very start
     pwm2.setPWM(k, 0, angleToPulse(90));
     k--;
 }
