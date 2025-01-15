@@ -50,7 +50,7 @@ while(k>=0){
 
 void loop() {
 
-String myString= Serial.readString();
+String myString= Serial.readStringUntil('\n');
 //string format  is servonumber|servonumber|delay|1 for ACW and 0 for CW   eg. 0110001
 //format for servo numbers, is 01 for first servo of first driver and 11 for first servo of second driver,
 //for using only one servo at a time give 00.
