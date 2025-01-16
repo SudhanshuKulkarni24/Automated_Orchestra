@@ -103,5 +103,5 @@ def play_midi_from_file(midi_file_path):
     arduino.close()
 
 # Example usage
-play_midi_from_file(r"C:\Users\sangi\Downloads\audio\54968.mid")
+play_midi_from_file(r"PATH")
 
