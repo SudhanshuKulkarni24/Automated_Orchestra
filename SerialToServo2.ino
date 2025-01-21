@@ -1,7 +1,9 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <Servo.h>
-
+ Servo S1;
+ Servo S2;
+ Servo S3; 
 // Create an instance of the PCA9685 driver
 Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
 
@@ -29,32 +31,44 @@ void servocom(int x, int y, int lor){
 
   digitalWrite(x+20,HIGH);
   if(x>0 && x<=16)
-    // Servo on channel no., 0, Moving angle
-    pwm1.setPWM(x-1, 0, angleToPulse(ang));
+    pwm1.setPWM(x-1, 0, angleToPulse(ang));// Servo on channel no., 0, Moving angle
+   else if(x==17)
+   S1.write(ang); 
+   else if(x==18)
+   S2.write(ang); 
+   else if(x==19)
+   S3.write(ang); 
   delay(y);
+  if(x>0 && x<=16)
+    pwm1.setPWM(x-1, 0, angleToPulse(90));// Servo on channel no., 0, Moving angle
+   else if(x==17)
+   S1.write(90); 
+   else if(x==18)
+   S2.write(90); 
+   else if(x==19)
+   S3.write(90); 
     
-  if(x>16){ // for x = 17,18,19
-    
-  }
 
-
+}
 void setup() {
-  Servo myServo;
-  int i = 0
-  int k = 16;
+  int k = 15;
   pwm1.begin();
   pwm1.setPWMFreq(50); 
 
 Serial.begin(9600);
 while(k>=0){ 
-  pinMode(k+21,OUTPUT); // SETTING PINS FOR CORRESPONDING leds 21,22,23.... &31,32,33... 
-  pinMode(k+31,OUTPUT);
+//  pinMode(,OUTPUT); // SETTING PINS FOR CORRESPONDING leds 21,22,23.... &31,32,33... 
     pwm1.setPWM(k, 0, angleToPulse(90));// to bring all servos to normal position at the very start
     k--;
+    delay(100);
 }
- for(i=0; i<3; i++){
+S1.attach(9);
+S1.write(90);
+S2.attach(10);
+S2.write(90);
+S3.attach(11);
+S3.write(90);
 
- }
 }
 
 void loop() {
