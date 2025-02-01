@@ -4,9 +4,8 @@ import librosa
 import pretty_midi
 from pydub import AudioSegment
 
-# Define output path
-output_path = "/content/output/"  # Change this to your preferred directory
-os.makedirs(output_path, exist_ok=True)  # Ensure the output directory exists
+output_path = os.path.expanduser("~/Auto_Orchestra_output")
+os.makedirs(output_path, exist_ok=True)
 
 def MP3_to_WAV(mp3_file):
     """Convert MP3 to WAV format."""
@@ -55,7 +54,7 @@ def wav_to_midi(wav_file):
     return midi_file_name
 
 # Example usage
-mp3_file = "/content/happy-birthday-254480.mp3"  # Change this to your MP3 file path
+mp3_file = "/Users/sudhanshukulkarni/projects/Auto_Orchestra/happy-birthday-254480.mp3"  # Change this to your MP3 file path
 
 # Step 1: Convert MP3 to WAV
 wav_file = MP3_to_WAV(mp3_file)
@@ -157,4 +156,4 @@ def play_midi_from_file(midi_file_path):
     arduino.close()
 
 # Example usage
-play_midi_from_file("{midi_file}")
+play_midi_from_file(midi_file)
