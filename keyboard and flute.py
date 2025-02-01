@@ -157,4 +157,4 @@ def play_midi_from_file(midi_file_path):
     arduino.close()
 
 # Example usage
-play_midi_from_file("/content/output/happy-birthday-254480.midi")
+play_midi_from_file("{midi_file}")
